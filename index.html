@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthConnect | Electronic Health Records & Consultation Portal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav>
+    <div class="logo"><i class="fas fa-heartbeat"></i> Health<span class="dot">Connect</span></div>
+    <ul>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#appointments">Appointments</a></li>
+      <li><a href="#records">Patient Records</a></li>
+    </ul>
+    <button class="btn-book" onclick="openBookingModal()"><i class="fas fa-calendar-plus"></i> Book Consultation</button>
+  </nav>
+
+  <header id="overview" class="hero">
+    <div class="hero-container">
+      <div class="badge-pill"><i class="fas fa-shield-alt"></i> HIPAA-Compliant Medical Records System</div>
+      <h1>Intelligent Healthcare Management.<br><span class="gradient-text">Connected Care for Everyone.</span></h1>
+      <p>Streamline medical consultations, manage electronic health records (EHR), and track patient progress seamlessly.</p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <i class="fas fa-user-injured icon-teal"></i>
+          <div>
+            <h3 id="statTotalPatients">0</h3>
+            <p>Active Patients</p>
+          </div>
+        </div>
+        <div class="metric-card">
+          <i class="fas fa-user-md icon-blue"></i>
+          <div>
+            <h3 id="statDoctors">12</h3>
+            <p>On-Duty Specialists</p>
+          </div>
+        </div>
+        <div class="metric-card">
+          <i class="fas fa-calendar-check icon-emerald"></i>
+          <div>
+            <h3 id="statAppointments">0</h3>
+            <p>Scheduled Visits</p>
+          </div>
+        </div>
+        <div class="metric-card">
+          <i class="fas fa-pills icon-rose"></i>
+          <div>
+            <h3 id="statPrescriptions">24</h3>
+            <p>Active Prescriptions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="controls-section">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" id="searchInput" placeholder="Search records by patient name, diagnosis, or doctor..." onkeyup="filterRecords()">
+    </div>
+
+    <div class="filter-group">
+      <select id="departmentFilter" onchange="filterRecords()">
+        <option value="all">All Departments</option>
+        <option value="General Medicine">General Medicine</option>
+        <option value="Cardiology">Cardiology</option>
+        <option value="Pediatrics">Pediatrics</option>
+        <option value="Neurology">Neurology</option>
+      </select>
+
+      <select id="statusFilter" onchange="filterRecords()">
+        <option value="all">All Statuses</option>
+        <option value="Scheduled">Scheduled</option>
+        <option value="Completed">Completed</option>
+        <option value="Pending Review">Pending Review</option>
+      </select>
+    </div>
+  </section>
+
+  <main id="appointments" class="main-container">
+    <div class="section-header">
+      <h2>Recent Consultations & Patient Records</h2>
+      <p>Manage upcoming appointments and review past medical histories.</p>
+    </div>
+
+    <div class="records-grid" id="recordsGrid">
+      </div>
+  </main>
+
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>Schedule Consultation</h2>
+        <button class="close-btn" onclick="closeBookingModal()">&times;</button>
+      </div>
+
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+        <div class="form-group">
+          <label>Patient Full Name</label>
+          <input type="text" id="patientName" placeholder="e.g. Sarah Jenkins" required>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Age</label>
+            <input type="number" id="patientAge" placeholder="e.g. 29" required>
+          </div>
+          <div class="form-group">
+            <label>Department</label>
+            <select id="patientDept">
+              <option value="General Medicine">General Medicine</option>
+              <option value="Cardiology">Cardiology</option>
+              <option value="Pediatrics">Pediatrics</option>
+              <option value="Neurology">Neurology</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Assigned Specialist</label>
+          <input type="text" id="doctorName" placeholder="e.g. Dr. Aris Thorne" required>
+        </div>
+
+        <div class="form-group">
+          <label>Diagnosis / Reason for Visit</label>
+          <textarea id="patientDiagnosis" placeholder="Brief description of symptoms or routine checkup..." required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Appointment Date</label>
+            <input type="date" id="appointmentDate" required>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select id="appointmentStatus">
+              <option value="Scheduled">Scheduled</option>
+              <option value="Pending Review">Pending Review</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" onclick="closeBookingModal()">Cancel</button>
+          <button type="submit" class="btn-submit">Save Appointment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>HealthConnect EHR Portal • Engineered by <strong>Daniel Gwoloba</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+                                                                                                          </html>
