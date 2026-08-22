@@ -35,7 +35,15 @@ It bridges the gap between traditional hospital record rooms, clinical staff, an
 
 ## 🚀 Getting Started
 
+## 📅 Development Journal
 
-## Day 1 
+### Day 1: Architectural Setup & Base UI Framework
 
+**Goal:** Establish the foundation for HealthConnect and set up the modern, dark-teal user interface.
+
+* **Platform Scope Defined:** Mapped out solutions for hospital record-room digital indexing, patient-staff messaging, and remote e-prescriptions.
+* **Dashboard Structure (`index.html`):** Created the primary layout featuring navigation, hero stats, and quick-access module cards for core workflows.
+* **Design System (`css/style.css`):** Implemented a dark slate & medical teal glassmorphism design system using CSS Grid, Flexbox, and ambient radial gradients.
+
+---
 
